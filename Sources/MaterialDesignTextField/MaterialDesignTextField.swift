@@ -97,7 +97,7 @@ public struct MaterialDesignTextField: View {
 	///   - hint: The field hint string.
 	///   - editing: Whether the field is in the editing state.
 	///   - valid: Whether the field is in the valid state.
-	init(_ text: Binding<String>,
+	public init(_ text: Binding<String>,
 		 placeholder: String,
 		 hint: Binding<String>,
 		 editing: Binding<Bool>,
