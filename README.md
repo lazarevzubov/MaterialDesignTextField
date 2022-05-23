@@ -25,3 +25,5 @@ An example of usage:
             editingTextField1 = false
             editingTextField2 = false
         }
+
+An dummy project showing an example usage can be found [here](https://github.com/lazarevzubov/MaterialDesignTextFieldExample).
