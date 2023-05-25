@@ -21,6 +21,7 @@ public struct MaterialDesignTextField: View {
 				.background(RoundedRectangle(cornerRadius: 4.0, style: .continuous)
 					.stroke(borderColor, lineWidth: borderWidth))
 				.focused($focusField, equals: .textField)
+                .textInputAutocapitalization(autocapitalization)
 			HStack {
 				ZStack {
 					Color(.white)
@@ -61,7 +62,8 @@ public struct MaterialDesignTextField: View {
 	}
 	
 	// MARK: Private properties
-	
+
+    private let autocapitalization: TextInputAutocapitalization
 	private let placeholder: String
 	@State
 	private var borderColor = Color.gray
@@ -97,16 +99,19 @@ public struct MaterialDesignTextField: View {
 	///   - hint: The field hint string.
 	///   - editing: Whether the field is in the editing state.
 	///   - valid: Whether the field is in the valid state.
+    ///   - autocapitalization: The kind of autocapitalization behavior applied during text input.
 	public init(_ text: Binding<String>,
-		 placeholder: String,
-		 hint: Binding<String>,
-		 editing: Binding<Bool>,
-		 valid: Binding<Bool>) {
-		self._text = text
+                placeholder: String,
+                hint: Binding<String>,
+                editing: Binding<Bool>,
+                valid: Binding<Bool>,
+                autocapitalization: TextInputAutocapitalization = .sentences) {
+		_text = text
 		self.placeholder = placeholder
-		self._hint = hint
-		self._editing = editing
-		self._valid = valid
+		_hint = hint
+		_editing = editing
+		_valid = valid
+        self.autocapitalization = autocapitalization
 	}
 	
 	// MARK: - Methods
