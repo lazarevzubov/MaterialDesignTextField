@@ -18,8 +18,10 @@ public struct MaterialDesignTextField: View {
 		ZStack {
 			TextField("", text: $text)
 				.padding(6.0)
-				.background(RoundedRectangle(cornerRadius: 4.0, style: .continuous)
-					.stroke(borderColor, lineWidth: borderWidth))
+				.background(
+                    RoundedRectangle(cornerRadius: 4.0, style: .continuous)
+                        .stroke(borderColor, lineWidth: borderWidth)
+                )
 				.focused($focusField, equals: .textField)
                 .textInputAutocapitalization(autocapitalization)
 			HStack {
@@ -76,9 +78,9 @@ public struct MaterialDesignTextField: View {
 	@Binding
 	private var hint: String
 	@State
-	private var placeholderBackgroundOpacity = 0.0
+    private var placeholderBackgroundOpacity = CGFloat.zero
 	@State
-	private var placeholderBottomPadding = 0.0
+	private var placeholderBottomPadding = CGFloat.zero
 	@State
 	private var placeholderColor = Color.gray
 	@State
@@ -100,18 +102,22 @@ public struct MaterialDesignTextField: View {
 	///   - editing: Whether the field is in the editing state.
 	///   - valid: Whether the field is in the valid state.
     ///   - autocapitalization: The kind of autocapitalization behavior applied during text input.
-	public init(_ text: Binding<String>,
-                placeholder: String,
-                hint: Binding<String>,
-                editing: Binding<Bool>,
-                valid: Binding<Bool>,
-                autocapitalization: TextInputAutocapitalization = .sentences) {
+	public init(
+        _ text: Binding<String>,
+        placeholder: String,
+        hint: Binding<String>,
+        editing: Binding<Bool>,
+        valid: Binding<Bool>,
+        autocapitalization: TextInputAutocapitalization = .sentences
+    ) {
+        self.placeholder = placeholder
+        self.autocapitalization = autocapitalization
+
 		_text = text
-		self.placeholder = placeholder
 		_hint = hint
 		_editing = editing
 		_valid = valid
-        self.autocapitalization = autocapitalization
+
 	}
 	
 	// MARK: - Methods
@@ -124,12 +130,12 @@ public struct MaterialDesignTextField: View {
 	}
 	
 	private func updateBorderColor() {
-		if !valid {
-			borderColor = .red
+        borderColor = if !valid {
+			.red
 		} else if editing {
-			borderColor = .blue
+			.blue
 		} else {
-			borderColor = .gray
+			.gray
 		}
 	}
 	
@@ -147,35 +153,35 @@ public struct MaterialDesignTextField: View {
 	}
 	
 	private func updatePlaceholderBackground() {
-		if editing
+        placeholderBackgroundOpacity = if editing
 			|| !text.isEmpty {
-			placeholderBackgroundOpacity = 1.0
+			1.0
 		} else {
-			placeholderBackgroundOpacity = 0.0
+            .zero
 		}
 	}
 	
 	private func updatePlaceholderColor() {
-		if valid {
-			placeholderColor = editing
+        placeholderColor = if valid {
+			editing
 				? .blue
 				: .gray
 		} else if text.isEmpty {
-			placeholderColor = editing
+			editing
 				? .red
 				: .gray
 		} else {
-			placeholderColor = .red
+			.red
 		}
 		
 	}
 	
 	private func updatePlaceholderFontSize() {
-		if editing
+        placeholderFontSize = if editing
 			|| !text.isEmpty {
-			placeholderFontSize = 10.0
+			10.0
 		} else {
-			placeholderFontSize = 16.0
+			16.0
 		}
 	}
 	
