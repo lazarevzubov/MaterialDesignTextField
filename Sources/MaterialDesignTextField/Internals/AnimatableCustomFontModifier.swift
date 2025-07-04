@@ -17,7 +17,7 @@ struct AnimatableCustomFontModifier: AnimatableModifier {
 	
 	// MARK: AnimatableModifier protocol properties
 	
-	var animatableData: CGFloat {
+	nonisolated var animatableData: CGFloat {
 		get { size }
 		set { size = newValue }
 	}
